@@ -51,6 +51,7 @@ net = [
   "mio/os-poll",
   "mio/os-ext",
   "mio/net",
+  "mio/net-raw",
   "socket2",
   "windows-sys/Win32_Foundation",
   "windows-sys/Win32_Security",
@@ -95,7 +96,9 @@ pin-project-lite = "0.2.11"
 
 # Everything else is optional...
 bytes = { version = "1.0.0", optional = true }
-mio = { version = "0.8.9", optional = true, default-features = false }
+memchr = { version = "2.2", optional = true }
+mio = { git = "https://github.com/Yneth/mio", branch = "master", optional = true  }
+socket2 = { version = "0.4.4", optional = true, features = [ "all" ] }
 num_cpus = { version = "1.8.0", optional = true }
 parking_lot = { version = "0.12.0", optional = true }
 

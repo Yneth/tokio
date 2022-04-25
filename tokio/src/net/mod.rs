@@ -42,6 +42,9 @@ cfg_net! {
         mod udp;
         pub use udp::UdpSocket;
     }
+
+    pub mod raw;
+    pub use raw::socket::NetRawSocket;
 }
 
 cfg_net_unix! {
