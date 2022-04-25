@@ -24,7 +24,7 @@ impl NetRawSocket {
         let sys = mio::net::NetRawSocket::new(domain, protocol)?;
         sys.set_nonblocking(true)?;
         let io = PollEvented::new(sys)?;
-        Ok(NetRawSocket { io })
+        Ok(Self { io })
     }
 
     pub async fn send_to<A: ToSocketAddrs>(&self, buf: &[u8], target: A) -> io::Result<usize> {
@@ -413,6 +413,10 @@ impl NetRawSocket {
     /// interface is chosen by the system.
     pub fn join_multicast_v4(&self, multiaddr: Ipv4Addr, interface: Ipv4Addr) -> io::Result<()> {
         self.io.join_multicast_v4(&multiaddr, &interface)
+    }
+
+    pub fn set_header_included(&self, on: bool) -> io::Result<()> {
+        self.io.set_header_included(on)
     }
 
     /// Executes an operation of the `IPV6_ADD_MEMBERSHIP` type.
