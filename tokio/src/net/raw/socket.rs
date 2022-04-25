@@ -22,6 +22,7 @@ cfg_net! {
 impl NetRawSocket {
     pub async fn new(domain: Domain, protocol: Option<Protocol>) -> io::Result<NetRawSocket> {
         let sys = mio::net::NetRawSocket::new(domain, protocol)?;
+        sys.set_nonblocking(true)?;
         let io = PollEvented::new(sys)?;
         Ok(NetRawSocket { io })
     }
